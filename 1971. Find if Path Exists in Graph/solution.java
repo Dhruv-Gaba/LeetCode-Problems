@@ -16,7 +16,9 @@ class Solution {
                     int s1 = source == edges[j][0] ? edges[j][1] : edges[j][0];
                     edges[j][0] = -1;
                     edges[j][1] = -1;
-                    s.add(s1);
+                    if(!s.contains(s1)){
+                        s.add(s1);
+                    }
                 }
             }
         }
