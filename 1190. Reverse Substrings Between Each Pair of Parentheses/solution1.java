@@ -1,5 +1,4 @@
 class Solution {
-    int i=0;
     public String reverseParentheses(String s) {
         StringBuilder sb=new StringBuilder(s);
         int i=0;
