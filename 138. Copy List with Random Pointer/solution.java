@@ -1,35 +1,42 @@
-/**
- * Definition for singly-linked list.
- * public class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode() {}
- *     ListNode(int val) { this.val = val; }
- *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
- * }
- */
+/*
+// Definition for a Node.
+class Node {
+    int val;
+    Node next;
+    Node random;
+
+    public Node(int val) {
+        this.val = val;
+        this.next = null;
+        this.random = null;
+    }
+}
+*/
+
 class Solution {
-    public ListNode rotateRight(ListNode head, int k) {
-        if(k==0){
-            return head;
-        }
-        if(head==null){
-            return null;
-        }
-        int n=1;
-        ListNode temp=head;
-        while(temp.next!=null){
+    public Node copyRandomList(Node head) {
+        Node temp=head;
+        Map<Node,Node> map=new HashMap<>();
+        while(temp!=null){
+            map.put(temp,new Node(temp.val));
             temp=temp.next;
-            n++;
         }
-        temp.next=head;
         temp=head;
-        int rotate=n-(k%n);
-        for(int i=1;i<rotate;i++){
+        while(temp!=null){
+            if(temp.next==null){
+                map.get(temp).next=null;
+            }
+            else{
+                map.get(temp).next=map.get(temp.next);
+            }
+            if(temp.random==null){
+                map.get(temp).random=null;
+            }
+            else{
+                map.get(temp).random=map.get(temp.random);
+            }
             temp=temp.next;
         }
-        head=temp.next;
-        temp.next=null;
-        return head;
+        return map.get(head);
     }
 }
